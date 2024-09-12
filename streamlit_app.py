@@ -3,6 +3,12 @@ import streamlit as st
 # from snowflake.snowpark.context import get_active_session # Se comenta debido a que se cambia la forma de conextar a snowflake
 from snowflake.snowpark.functions import col
 
+# Para Seccion 04: (Conexion con Frutyvice)
+import requests
+
+# --------------------------------------------------------------------
+# Seccion 01: Mensaje de inicio de la applicacion
+
 # Write directly to the app
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
 st.write(
@@ -14,12 +20,18 @@ st.write(
 name_on_order = st.text_input("Name on Smoothie:", "Your name")
 st.write("The name on the smoothie will be:", name_on_order)
 
+# --------------------------------------------------------------------
+# Seccion 02: Conexion con Snowflake
+
 # # Conexion con snowflake via
 # # Snowflake (SiS)
 # session = get_active_session() # Se comenta debido a que se cambia la forma de conextar a snowflake
 # Streamlit (SniS)
 cnx = st.connection("snowflake")
 session = cnx.session()
+
+# --------------------------------------------------------------------
+# Seccion 03: Cuadro de seleccion de ingredientes segun datos de Snowflake
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 # Se muestra la tabla obtenida en forma de tabla
@@ -72,7 +84,9 @@ if ingredients_list:
         # Mensaje destacado satisfactorio
         st.success('Your Smoothie is ordered!', icon="✅")
 
-import requests
+# --------------------------------------------------------------------
+# Seccion 04: Tabla de informacion nutricional obtenida de Frutyvice
+
 # Obtencion de informacion cruda de URL
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 
