@@ -1,6 +1,6 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
+# from snowflake.snowpark.context import get_active_session # Se comenta debido a que se cambia la forma de conextar a snowflake
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
@@ -14,7 +14,13 @@ st.write(
 name_on_order = st.text_input("Name on Smoothie:", "Your name")
 st.write("The name on the smoothie will be:", name_on_order)
 
-session = get_active_session()
+# # Conexion con snowflake via
+# # Snowflake (SiS)
+# session = get_active_session() # Se comenta debido a que se cambia la forma de conextar a snowflake
+# Streamlit (SniS)
+cnx = st.connection("snowflake")
+session = cnx.session()
+
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 # Se muestra la tabla obtenida en forma de tabla
 # st.dataframe(data=my_dataframe, use_container_width=True)
