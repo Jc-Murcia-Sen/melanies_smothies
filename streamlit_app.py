@@ -82,6 +82,6 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon"
 # Creacion de dt (DataFrame) de la informacion obtenida
 ft_dt = st.dataframe(
     data = fruityvice_response.json()
-    , use_container_width=true
+    , use_container_width=True
 )
 
