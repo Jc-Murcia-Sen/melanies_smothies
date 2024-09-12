@@ -33,9 +33,10 @@ session = cnx.session()
 # --------------------------------------------------------------------
 # Seccion 03: Cuadro de seleccion de ingredientes segun datos de Snowflake
 
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'),col('SEARCH_ON'))
 # Se muestra la tabla obtenida en forma de tabla
-# st.dataframe(data=my_dataframe, use_container_width=True)
+st.dataframe(data=my_dataframe, use_container_width=True)
+st.stop()
 
 # Se muestra la tabla obtenida en forma de lista seleccionable
 ingredients_list = st.multiselect(
