@@ -60,6 +60,21 @@ if ingredients_list:
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
 
+        # --------------------------------------------------------------------
+        # Seccion 2.A: Tabla de informacion nutricional obtenida de Frutyvice
+
+        # Obtencion de informacion cruda de URL
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+
+        # # visualizacion de informacion cruda de URL
+        # st.text(fruityvice_response.json())
+
+        # Creacion de dt (DataFrame) de la informacion obtenida
+        ft_dt = st.dataframe(
+            data = fruityvice_response.json()
+            , use_container_width=True
+        )
+
     # Visualizacion de ingredientes en un unico campo
     st.write(ingredients_string)
 
@@ -83,19 +98,4 @@ if ingredients_list:
         session.sql(my_insert_stmt).collect()
         # Mensaje destacado satisfactorio
         st.success('Your Smoothie is ordered!', icon="✅")
-
-# --------------------------------------------------------------------
-# Seccion 04: Tabla de informacion nutricional obtenida de Frutyvice
-
-# Obtencion de informacion cruda de URL
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-
-# # visualizacion de informacion cruda de URL
-# st.text(fruityvice_response.json())
-
-# Creacion de dt (DataFrame) de la informacion obtenida
-ft_dt = st.dataframe(
-    data = fruityvice_response.json()
-    , use_container_width=True
-)
 
