@@ -63,8 +63,11 @@ if ingredients_list:
         # --------------------------------------------------------------------
         # Seccion 2.A: Tabla de informacion nutricional obtenida de Frutyvice
 
+        # Subtitulo: Informacion nutricional
+        st.subheader(fruit_chose + ' Nutrition Information')
+
         # Obtencion de informacion cruda de URL
-        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon" + fruit_chosen)
 
         # # visualizacion de informacion cruda de URL
         # st.text(fruityvice_response.json())
