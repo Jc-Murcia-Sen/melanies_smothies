@@ -66,7 +66,7 @@ if ingredients_list:
         ingredients_string += fruit_chosen + ' '
 
         search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-        st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
+        # st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
 
         # --------------------------------------------------------------------
         # Seccion 2.A: Tabla de informacion nutricional obtenida de Frutyvice
@@ -75,7 +75,7 @@ if ingredients_list:
         st.subheader(fruit_chosen + ' Nutrition Information')
 
         # Obtencion de informacion cruda de URL
-        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_chosen)
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + SEARCH_ON)
 
         # # visualizacion de informacion cruda de URL
         # st.text(fruityvice_response.json())
